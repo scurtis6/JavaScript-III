@@ -131,3 +131,58 @@ CharacterStats.prototype.takeDamage = function(){
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
+  function Villain(attributes){
+    this.power = attributes.power,
+    Humanoid.call(this, attributes)
+  }
+  Villain.prototype = Object.create(Humanoid.prototype);
+  Villain.prototype.evilPower = function(){
+    return (`${this.name} power is ${this.power}`)
+  }
+
+  function Hero(attributes){
+    this.attack = attributes.attack,
+    Humanoid.call(this, attributes)
+  }
+  Hero.prototype = Object.create(Humanoid.prototype);
+  Hero.prototype.health = function(){
+    return (`${this.name} defeats the villian with ${this.attack} ${this.weapons}`)
+  }
+
+
+  const fight = new Villain({
+    createdAt: new Date(),
+    dimensions: {
+      length: 3,
+      width: 3,
+      height: 5,
+    },
+    healthPoints: 10,
+    name: 'Dart',
+    team: 'Bullseye Trube',
+    weapons: [
+      'Metal Darts',
+    ],
+    language: 'Solid Board',
+    power: 'Shooting',
+  });
+
+  const survive = new Hero({
+    createdAt: new Date(),
+    dimensions: {
+      length: 4,
+      width: 4,
+      height: 5,
+    },
+    healthPoints: 20,
+    name: 'Thunder',
+    team: 'Cloud Kindgdom',
+    weapons: [
+      'Lightening Bolts',
+    ],
+    language: 'High Speed',
+    attack: 'Charging',
+  });
+
+  console.log(fight.evilPower())
+  console.log(survive.health())
